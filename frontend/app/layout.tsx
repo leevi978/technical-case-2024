@@ -6,7 +6,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="flex flex-col justify-between min-h-screen">
-        <header className="bg-lightgray  p-6 flex-wrap flex flex-row justify-between">
+        <header className="bg-lightgray  p-6 flex-wrap flex flex-row justify-between gap-4">
           <Link href="/">Krogsveen technical case 2024</Link>
           <nav className="flex flex-row gap-8">
             <Link href="/">Home</Link>
