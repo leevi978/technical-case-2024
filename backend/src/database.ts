@@ -96,16 +96,35 @@ const userActivities: UserActivity[] = [
 
 class Database {
   public getData(query?: DataQuery): DataResponse {
+    const data = userActivities
+      .filter((ua) => timeGreaterThanOrEqual(ua.timestamp, query?.startTime))
+      .filter((ua) => timeLessThan(ua.timestamp, query?.endTime))
+      .filter((ua) => idFilter(ua.userId, query?.userIds))
+      .filter((ua) => idFilter(ua.activityId, query?.activityIds));
     return {
-      startTime: query?.startTime,
-      endTime: query?.endTime,
+      startTime:
+        query?.startTime ||
+        data
+          .map((ua) => new Date(ua.timestamp))
+          .reduce(function (a, b) {
+            return a < b ? a : b;
+          })
+          .toDateString(),
+      endTime:
+        query?.endTime ||
+        data
+          .map((ua) => {
+            const max = new Date(ua.timestamp);
+            max.setDate(max.getDate() + 1);
+            return max;
+          })
+          .reduce(function (a, b) {
+            return a > b ? a : b;
+          })
+          .toDateString(),
       users: users.filter((u) => userTimeRangeFilter(u, query)),
       activities: activities.filter((a) => activityTimeRangeFilter(a, query)),
-      userActivities: userActivities
-        .filter((ua) => timeGreaterThanOrEqual(ua.timestamp, query?.startTime))
-        .filter((ua) => timeLessThan(ua.timestamp, query?.endTime))
-        .filter((ua) => idFilter(ua.userId, query?.userIds))
-        .filter((ua) => idFilter(ua.activityId, query?.activityIds)),
+      userActivities: data,
     };
   }
 }

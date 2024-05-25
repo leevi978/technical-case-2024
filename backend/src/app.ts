@@ -8,7 +8,7 @@ const port = 8000;
 
 app.use(express.json());
 
-app.get(
+app.post(
   "/data",
 
   // startTime and endTime is a valid Date
