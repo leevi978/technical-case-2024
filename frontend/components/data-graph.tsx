@@ -14,7 +14,7 @@ export default function DataGraph({
   activities: Activity[];
 }) {
   return (
-    <div className="flex rounded dark:bg-zinc-200">
+    <div className="flex rounded">
       <LineChart
         xAxis={[
           {

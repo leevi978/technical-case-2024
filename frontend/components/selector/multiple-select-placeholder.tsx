@@ -48,7 +48,6 @@ export default function MultipleSelectPlaceholder({
       <label>{label}</label>
       <FormControl>
         <Select
-          className="dark:text-white dark:bg-darkgray dark:stroke-lightgray"
           multiple
           displayEmpty
           value={selectedValue}

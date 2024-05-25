@@ -6,13 +6,7 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        darkgray: "#292929",
-        lightgray: "#C5C5C5",
-        secondarylight: "#BBDDFF",
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };
